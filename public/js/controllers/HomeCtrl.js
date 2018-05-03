@@ -98,7 +98,7 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
             geojson.features.forEach(function (marker) {
                 // create a DOM element for the marker
                 var el = document.createElement('div');
-                el.className = 'mapboxgl-user-location-dot';
+                el.className = 'dot blink-2';
                 el.style.backgroundColor = '#1da1f2';
                 el.style.width = marker.properties.iconSize[0] + 'px';
                 el.style.height = marker.properties.iconSize[1] + 'px';
@@ -146,7 +146,7 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
         var markers = snapshotToArray(snap);
         markers.forEach(function (marker) {
             var el = document.createElement('div');
-            el.className = 'mapboxgl-user-location-dot';
+            el.className = 'dot blink-2';
             el.style.width = '19px';
             el.style.height = '22px';
             var markers = [marker.longitude, marker.latitude];
