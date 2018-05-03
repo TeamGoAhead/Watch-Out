@@ -8,23 +8,23 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
     var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mezar/cjgp399qn00bc2rp3gjqgyqiy',
-        center: [12.649210,56.041578],
+        center: [12.649210, 56.041578],
         zoom: 12
     });
 
-    var light= document.getElementById('blinka');
-    light.style.backgroundColor='#ffffff';
-    
+    var light = document.getElementById('blinka');
+    light.style.backgroundColor = '#ffffff';
+
     $scope.watchBtn = true;
     $scope.EndSessionBtn = false;
 
-    
+
 
 
     var ref = firebase.database().ref().child('locations');
     var users = $firebaseArray(ref);
-    
-    
+
+
 
     $scope.EndSession = function () {
 
@@ -32,9 +32,9 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
 
         $scope.watchBtn = !$scope.watchBtn;
         $scope.EndSessionBtn = !$scope.EndSessionBtn;
-        
-        var light= document.getElementById('blinka');
-        light.style.backgroundColor='#d31111';
+
+        var light = document.getElementById('blinka');
+        light.style.backgroundColor = '#d31111';
 
         mapboxgl.accessToken = 'pk.eyJ1IjoibWV6YXIiLCJhIjoiY2pnZzh5amMyNDVidjJ3bGlveGEyeDZxaSJ9.eV1srEZNonNXeljsG18mww';
 
@@ -42,36 +42,36 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
         var map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mezar/cjgp399qn00bc2rp3gjqgyqiy',
-            center: [12.649210,56.041578],
+            center: [12.649210, 56.041578],
             zoom: 12
         });
-        
-         // get localStorage
-         var nowLocation = window.localStorage.getItem('location');
-         console.log(nowLocation);
-         firebase.database().ref().child('locations').child(nowLocation).remove();
-         window.localStorage.removeItem('location');
+
+        // get localStorage
+        var nowLocation = window.localStorage.getItem('location');
+        console.log(nowLocation);
+        firebase.database().ref().child('locations').child(nowLocation).remove();
+        window.localStorage.removeItem('location');
     };
 
 
-    
+
     $scope.watchOut = function () {
         $scope.EndSessionBtn = true;
         $scope.watchBtn = false;
         navigator.geolocation.getCurrentPosition(function (pos) {
             console.log(pos.coords);
-            
+
             // var el = document.createElement('button')
-            light.style.backgroundColor='#20aa57';
+            light.style.backgroundColor = '#20aa57';
             var location = {
                 latitude: pos.coords.latitude,
                 longitude: pos.coords.longitude
             };
-            
+
             var geojson = {
                 "type": "FeatureCollection",
                 "features": [
-                   
+
                     {
                         "type": "Feature",
                         "properties": {
@@ -80,33 +80,33 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
                         },
                         "geometry": {
                             "type": "Point",
-                            "coordinates": [location.longitude,location.latitude]
+                            "coordinates": [location.longitude, location.latitude]
                         }
                     }
                 ]
             };
-            
-            
+
+
             map = new mapboxgl.Map({
                 container: 'map',
                 style: 'mapbox://styles/mezar/cjgp399qn00bc2rp3gjqgyqiy',
-                center: [location.longitude,location.latitude],
+                center: [location.longitude, location.latitude],
                 zoom: 16
             });
-            
+
             // add markers to map
-            geojson.features.forEach(function(marker) {
+            geojson.features.forEach(function (marker) {
                 // create a DOM element for the marker
                 var el = document.createElement('div');
                 el.className = 'mapboxgl-user-location-dot';
-                el.style.backgroundColor='#1da1f2';
+                el.style.backgroundColor = '#1da1f2';
                 el.style.width = marker.properties.iconSize[0] + 'px';
                 el.style.height = marker.properties.iconSize[1] + 'px';
-            
-                el.addEventListener('click', function() {
+
+                el.addEventListener('click', function () {
                     window.alert(marker.properties.message);
                 });
-            
+
                 // add marker to map
                 new mapboxgl.Marker(el)
                     .setLngLat(marker.geometry.coordinates)
@@ -120,9 +120,25 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
                     window.localStorage.setItem('location', id);
                 });
         });
+
+        setTimeout(function () {
+            // get localStorage
+            var nowLocation = window.localStorage.getItem('location');
+            console.log(nowLocation);
+            firebase.database().ref().child('locations').child(nowLocation).remove();
+            window.localStorage.removeItem('location');
+            alert('din session är slut');
+            $scope.watchBtn = true;
+            $scope.EndSessionBtn = false;
+            var light = document.getElementById('blinka');
+            light.style.backgroundColor = '#ffffff';
+            $scope.watchBtn = true;
+            $scope.EndSessionBtn = false;
+        }, 1800000);
+
     }
 
-   
+
 
     var positions = firebase.database().ref('locations');
     positions.on('value', function (snap) {
@@ -135,8 +151,8 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
             el.style.height = '22px';
             var markers = [marker.longitude, marker.latitude];
             new mapboxgl.Marker(el)
-            .setLngLat(markers)
-            .addTo(map);
+                .setLngLat(markers)
+                .addTo(map);
         });
 
     });
@@ -153,7 +169,7 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
         return returnArr;
     };
 
-    
+
 
 
 
