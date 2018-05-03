@@ -24,7 +24,7 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
     $scope.EndSession = function () {
         var light= document.getElementById('blinka');
         light.style.backgroundColor='#d31111';
-        
+
         mapboxgl.accessToken = 'pk.eyJ1IjoibWV6YXIiLCJhIjoiY2pnZzh5amMyNDVidjJ3bGlveGEyeDZxaSJ9.eV1srEZNonNXeljsG18mww';
 
 
@@ -34,6 +34,20 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
             center: [12.649210,56.041578],
             zoom: 12
         });
+        
+         // get localStorage
+         var nowLocation = window.localStorage.getItem('location');
+         var item = users[nowLocation];
+         console.log(nowLocation);
+         
+         
+         users.$remove(item)
+         .then(function(ref) {
+            
+             
+             ref.key === item.$id;
+             
+         });
     
     };
     
@@ -47,6 +61,7 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
                 latitude: pos.coords.latitude,
                 longitude: pos.coords.longitude
             };
+            
             var geojson = {
                 "type": "FeatureCollection",
                 "features": [
@@ -95,6 +110,7 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
                     var id = ref.key;
                     console.log('the location id is ' + id);
                     users.$indexFor(id);
+                    window.localStorage.setItem('location', id);
                 });
         });
     }
