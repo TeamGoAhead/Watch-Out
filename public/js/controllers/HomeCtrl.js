@@ -13,8 +13,10 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
     });
 
 
-
     
+    $scope.watchBtn = true;
+    $scope.EndSessionBtn = false;
+
 
 
 
@@ -22,6 +24,9 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
     var users = $firebaseArray(ref);
 
     $scope.EndSession = function () {
+
+        
+        
         var light= document.getElementById('blinka');
         light.style.backgroundColor='#d31111';
 
@@ -37,21 +42,16 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
         
          // get localStorage
          var nowLocation = window.localStorage.getItem('location');
-         var item = users[nowLocation];
          console.log(nowLocation);
-         
-         
-         users.$remove(item)
-         .then(function(ref) {
-            
-             
-             ref.key === item.$id;
-             
-         });
-    
+         firebase.database().ref().child('locations').child(nowLocation).remove();
+         window.localStorage.removeItem('location');
     };
+
+
     
     $scope.watchOut = function () {
+        $scope.EndSessionBtn = true;
+        $scope.watchBtn = false;
         navigator.geolocation.getCurrentPosition(function (pos) {
             console.log(pos.coords);
             var light= document.getElementById('blinka');
