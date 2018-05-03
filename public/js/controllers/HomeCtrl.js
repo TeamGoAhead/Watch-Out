@@ -12,12 +12,13 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
         zoom: 12
     });
 
-
+    var light= document.getElementById('blinka');
+    light.style.backgroundColor='#ffffff';
     
     $scope.watchBtn = true;
     $scope.EndSessionBtn = false;
 
-
+    
 
 
     var ref = firebase.database().ref().child('locations');
@@ -25,7 +26,10 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
 
     $scope.EndSession = function () {
 
-        
+
+
+        $scope.watchBtn = !$scope.watchBtn;
+        $scope.EndSessionBtn = !$scope.EndSessionBtn;
         
         var light= document.getElementById('blinka');
         light.style.backgroundColor='#d31111';
@@ -54,7 +58,7 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
         $scope.watchBtn = false;
         navigator.geolocation.getCurrentPosition(function (pos) {
             console.log(pos.coords);
-            var light= document.getElementById('blinka');
+            
             // var el = document.createElement('button')
             light.style.backgroundColor='#20aa57';
             var location = {

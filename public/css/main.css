@@ -254,6 +254,26 @@ footer a {
     margin-left: 75%;
 }
 
+.session {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    padding: 11px;
+    overflow: hidden;
+    border: none;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    font: normal 16px/1 "Times New Roman", Times, serif;
+    color: blue;
+    text-align: center;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    background: #fcfcfc;
+    position: relative;
+    margin-left: 75%;
+}
+
+
 .blink-2 {
     -webkit-animation: blink-2 0.9s infinite both;
     animation: blink-2 0.9s infinite both;
