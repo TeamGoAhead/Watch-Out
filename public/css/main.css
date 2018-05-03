@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Leckerli+One');
 body {
     margin: 0;
     padding: 0;
@@ -16,52 +17,55 @@ nav {
 }
 
 ul {
-    width: 80%;
-    margin: auto;
+    width: 100%;
+    margin:0;
     padding: 0;
 }
 
 ul li {
     list-style: none;
     display: inline-block;
-    padding: 20px;
+    padding: 5px;
+text-align: center;
+align-content: center;
+justify-content: center;
+}
+#logo-img{
+    width: 50px;
+    height: 60px;
+
+}
+#logo-img, .logo-text{
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+.logo-text{
+    font-family: 'Leckerli One', cursive;
+    color: white;
+    font-size: 45px;
+    margin-top: 15px;
 }
 
-ul li:hover {
-    background: #ac9ab6;
-}
-
-ul li a {
-    color: #fff;
-    text-decoration: none;
-}
-
-.toggle {
-    width: 100%;
-    padding: 10px 20px;
-    background: #001f44;
-    text-align: right;
-    box-sizing: border-box;
-    color: #fff;
-    font-size: 30px;
-    display: none;
-}
 
 @media (max-width:768px) {
-    .toggle {
-        display: block;
-    }
-    ul {
-        widows: 100%;
-        display: none;
-    }
+
+ 
+    
     ul li {
-        display: block;
-        text-align: center;
+        width: 25%;
+        list-style: none;
+        display: inline-block;
+        padding: 0px;
+    
     }
-    .active {
-        display: block;
+   
+    .logo-text{
+        font-size: 20px;
+        margin-top: 0px;
     }
+
+
+ 
 }
 
 #map {
