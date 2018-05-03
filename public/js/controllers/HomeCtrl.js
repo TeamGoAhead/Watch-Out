@@ -24,6 +24,32 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
     var ref = firebase.database().ref().child('locations');
     var users = $firebaseArray(ref);
 
+    var karta = undefined;
+    var el = document.createElement('div');
+    el.className = 'dot blink-2';
+    el.style.backgroundColor = '#1da1f2';
+    el.style.width = '19px';
+    el.style.height = '22px';
+
+
+    var positions = firebase.database().ref('locations');
+    positions.on('value', function (snap) {
+        console.log('SNAP ', snapshotToArray(snap));
+        if (snapshotToArray(snap).length < 1) {
+            new mapboxgl.Marker(el)
+                .addTo();
+
+        } 
+        var markers = snapshotToArray(snap);
+
+        markers.forEach(function (marker) {
+            var markers = [marker.longitude, marker.latitude];
+            new mapboxgl.Marker(el)
+                .setLngLat(markers)
+                .addTo(map);
+        });
+
+    });
 
 
     $scope.EndSession = function () {
@@ -140,22 +166,7 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
 
 
 
-    var positions = firebase.database().ref('locations');
-    positions.on('value', function (snap) {
-        console.log(snapshotToArray(snap));
-        var markers = snapshotToArray(snap);
-        markers.forEach(function (marker) {
-            var el = document.createElement('div');
-            el.className = 'dot blink-2';
-            el.style.width = '19px';
-            el.style.height = '22px';
-            var markers = [marker.longitude, marker.latitude];
-            new mapboxgl.Marker(el)
-                .setLngLat(markers)
-                .addTo(map);
-        });
 
-    });
 
     function snapshotToArray(snapshot) {
         var returnArr = [];
