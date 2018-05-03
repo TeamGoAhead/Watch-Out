@@ -1,12 +1,20 @@
 <main id="home">
         <div id='map'></div>
+        <div class="knapss"> 
+                <div class="blink">
+                        <button class="light blink-2 shake-bottom" type="button" id="blinka"></button>   
+                    </div>    
     <form class="form-horizontal" ng-submit="watchOut()">
-            <div class="knapss">
-                    <button class="light blink-2 shake-bottom" type="button" id="blinka"></button>
-                    <button class="button1 shake-bottom" type="submit" id="WatchOut">Watch-Out</button>
-                    <button class="button2 shake-bottom" type="button">End Session</button>
-                </div>
+                
+                    <button class="button1 shake-bottom" type="submit" id="WatchOut">Watch-Out</button>  
+                   
     </form>
-    
+    <form class="form-horizontal" ng-submit="EndSession ()">
+            <button class="button2 shake-bottom" type="submit" id="EndSession" >End Session</button>  
+</form>
+</div>
+  
     
 </main>
+
+

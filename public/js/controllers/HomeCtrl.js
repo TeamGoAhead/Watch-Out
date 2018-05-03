@@ -14,17 +14,35 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
 
 
 
-
+    
 
 
 
     var ref = firebase.database().ref().child('locations');
     var users = $firebaseArray(ref);
 
+    $scope.EndSession = function () {
+        var light= document.getElementById('blinka');
+        light.style.backgroundColor='#d31111';
+        
+        mapboxgl.accessToken = 'pk.eyJ1IjoibWV6YXIiLCJhIjoiY2pnZzh5amMyNDVidjJ3bGlveGEyeDZxaSJ9.eV1srEZNonNXeljsG18mww';
 
+
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mezar/cjgp399qn00bc2rp3gjqgyqiy',
+            center: [12.649210,56.041578],
+            zoom: 12
+        });
+    
+    };
+    
     $scope.watchOut = function () {
         navigator.geolocation.getCurrentPosition(function (pos) {
             console.log(pos.coords);
+            var light= document.getElementById('blinka');
+            // var el = document.createElement('button')
+            light.style.backgroundColor='#20aa57';
             var location = {
                 latitude: pos.coords.latitude,
                 longitude: pos.coords.longitude
@@ -80,6 +98,8 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
                 });
         });
     }
+
+   
 
     var positions = firebase.database().ref('locations');
     positions.on('value', function (snap) {
