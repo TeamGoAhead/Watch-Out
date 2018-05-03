@@ -9,7 +9,7 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
         container: 'map',
         style: 'mapbox://styles/mezar/cjgp399qn00bc2rp3gjqgyqiy',
         center: [12.649210,56.041578],
-        zoom: 16
+        zoom: 12
     });
 
 
