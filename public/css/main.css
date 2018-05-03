@@ -1,0 +1,13 @@
+body {
+  padding-top: 75px;
+}
+
+#home {
+  display: block;
+  margin: auto;
+  width: 30%;
+}
+
+.full-width {
+  width: 100%;
+}
