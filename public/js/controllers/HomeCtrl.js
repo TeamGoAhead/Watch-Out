@@ -23,6 +23,8 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
 
     var ref = firebase.database().ref().child('locations');
     var users = $firebaseArray(ref);
+    
+    
 
     $scope.EndSession = function () {
 
@@ -84,6 +86,7 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
                 ]
             };
             
+            
             map = new mapboxgl.Map({
                 container: 'map',
                 style: 'mapbox://styles/mezar/cjgp399qn00bc2rp3gjqgyqiy',
@@ -124,6 +127,18 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
     var positions = firebase.database().ref('locations');
     positions.on('value', function (snap) {
         console.log(snapshotToArray(snap));
+        var markers = snapshotToArray(snap);
+        markers.forEach(function (marker) {
+            var el = document.createElement('div');
+            el.className = 'mapboxgl-user-location-dot';
+            el.style.width = '19px';
+            el.style.height = '22px';
+            var markers = [marker.longitude, marker.latitude];
+            new mapboxgl.Marker(el)
+            .setLngLat(markers)
+            .addTo(map);
+        });
+
     });
 
     function snapshotToArray(snapshot) {
@@ -131,7 +146,6 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
 
         snapshot.forEach(function (childSnapshot) {
             var item = childSnapshot.val();
-            item.key = childSnapshot.key;
 
             returnArr.push(item);
         });
