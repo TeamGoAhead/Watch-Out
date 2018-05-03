@@ -41,10 +41,7 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
                         },
                         "geometry": {
                             "type": "Point",
-                            "coordinates": [
-                                12.6914093,
-                                56.0573607
-                            ]
+                            "coordinates": [location.longitude,location.latitude]
                         }
                     }
                 ]
