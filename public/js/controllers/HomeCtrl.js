@@ -2,9 +2,17 @@ var app = angular.module('watchOut');
 
 app.controller('HomeCtrl', function ($scope, $firebaseArray) {
 
-
-
     mapboxgl.accessToken = 'pk.eyJ1IjoibWV6YXIiLCJhIjoiY2pnZzh5amMyNDVidjJ3bGlveGEyeDZxaSJ9.eV1srEZNonNXeljsG18mww';
+
+
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mezar/cjgp399qn00bc2rp3gjqgyqiy',
+        center: [12.6914093,56.0573607],
+        zoom: 16
+    });
+
+
 
 
 
@@ -42,7 +50,7 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
                 ]
             };
             
-            var map = new mapboxgl.Map({
+            map = new mapboxgl.Map({
                 container: 'map',
                 style: 'mapbox://styles/mezar/cjgp399qn00bc2rp3gjqgyqiy',
                 center: [location.latitude,location.longitude],
