@@ -8,7 +8,7 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
     var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mezar/cjgp399qn00bc2rp3gjqgyqiy',
-        center: [12.6914093,56.0573607],
+        center: [12.649210,56.041578],
         zoom: 16
     });
 
@@ -53,7 +53,7 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
             map = new mapboxgl.Map({
                 container: 'map',
                 style: 'mapbox://styles/mezar/cjgp399qn00bc2rp3gjqgyqiy',
-                center: [location.latitude,location.longitude],
+                center: [location.longitude,location.latitude],
                 zoom: 16
             });
             
