@@ -77,6 +77,23 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
         console.log(nowLocation);
         firebase.database().ref().child('locations').child(nowLocation).remove();
         window.localStorage.removeItem('location');
+        positions.on('value', function (snap) {
+            console.log('SNAP ', snapshotToArray(snap));
+            if (snapshotToArray(snap).length < 1) {
+                new mapboxgl.Marker(el)
+                    .addTo();
+    
+            } 
+            var markers = snapshotToArray(snap);
+    
+            markers.forEach(function (marker) {
+                var markers = [marker.longitude, marker.latitude];
+                new mapboxgl.Marker(el)
+                    .setLngLat(markers)
+                    .addTo(map);
+            });
+    
+        });
     };
 
 
