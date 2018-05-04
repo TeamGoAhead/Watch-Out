@@ -162,7 +162,7 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
                     users.$indexFor(id);
                     window.localStorage.setItem('location', id);
                 });
-        });
+        }, null, { enableHighAccuracy: true  });
 
         setTimeout(function () {
             // get localStorage
