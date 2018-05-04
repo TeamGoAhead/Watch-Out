@@ -9,7 +9,7 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
         container: 'map',
         style: 'mapbox://styles/mezar/cjgp399qn00bc2rp3gjqgyqiy',
         center: [12.649210, 56.041578],
-        zoom: 12
+        zoom: 10
     });
 
     var light = document.getElementById('blinka');
@@ -69,7 +69,7 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
             container: 'map',
             style: 'mapbox://styles/mezar/cjgp399qn00bc2rp3gjqgyqiy',
             center: [12.649210, 56.041578],
-            zoom: 12
+            zoom: 10
         });
 
         // get localStorage
@@ -134,7 +134,7 @@ app.controller('HomeCtrl', function ($scope, $firebaseArray) {
                 container: 'map',
                 style: 'mapbox://styles/mezar/cjgp399qn00bc2rp3gjqgyqiy',
                 center: [location.longitude, location.latitude],
-                zoom: 16
+                zoom: 14
             });
 
             // add markers to map
